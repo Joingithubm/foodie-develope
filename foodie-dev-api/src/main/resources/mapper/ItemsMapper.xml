@@ -20,4 +20,29 @@
         id, item_name, cat_id, root_cat_id, sell_counts, on_off_status, content, created_time, updated_time
     </sql>
 
+
+    <select id="getIndexItems" resultMap="" parameterType="java.lang.Integer">
+        SELECT
+            c.id AS rootCatId,
+            c.NAME AS rootCatName,
+            c.slogan AS slogan,
+            c.cat_image AS catImage,
+            c.bg_color AS bgColor,
+            i.id AS itemId,
+            i.item_name AS itemName,
+            ii.url AS itemUrl,
+            i.created_time AS createdTime
+        FROM
+            category c
+                LEFT JOIN items i ON c.id = i.root_cat_id
+                LEFT JOIN items_img ii ON i.id = ii.item_id
+        WHERE
+            ii.is_main = 1
+          AND c.type = 1
+          AND c.id = #{catId}
+        ORDER BY
+            i.created_time DESC
+            LIMIT 0,6
+    </select>
+
 </mapper>

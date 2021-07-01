@@ -14,7 +14,25 @@ import com.athome.entity.Users;
  */
 public interface IUsersService {
 
+    /**
+     * 判断用户名是否存在
+     * @param username
+     * @return
+     */
     boolean queryUsernameIsExit(String username);
 
+    /**
+     * 用户登录
+     * @param username
+     * @param password
+     * @return
+     */
+    Users queryUserForLogin(String username, String password);
+
+    /**
+     * 创建用户
+     * @param userBO
+     * @return
+     */
     Users createUser(UserBO userBO);
 }

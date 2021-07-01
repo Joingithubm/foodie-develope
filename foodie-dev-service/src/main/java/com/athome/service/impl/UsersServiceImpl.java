@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
 import java.util.Date;
+import java.util.Random;
 
 /**
  * <p>
@@ -26,6 +27,8 @@ public class UsersServiceImpl implements IUsersService {
     @Autowired
     UsersMapper usersMapper;
 
+    private static Random random = new Random();
+
     @Override
     public boolean queryUsernameIsExit(String username) {
         Example example = new Example(Users.class);
@@ -35,9 +38,20 @@ public class UsersServiceImpl implements IUsersService {
     }
 
     @Override
+    public Users queryUserForLogin(String username, String password) {
+
+        Example example = new Example(Users.class);
+        example.createCriteria().andEqualTo("username",username)
+                .andEqualTo("password",password);
+
+        Users users = usersMapper.selectOneByExample(example);
+        return users;
+    }
+
+    @Override
     public Users createUser(UserBO userBO) {
         Users users  = new Users();
-        users.setId("2");
+        users.setId(random.nextInt(100)+"");
         users.setUsername(userBO.getUsername());
         users.setPassword(MD5Util.getMD5Str(userBO.getPassword()));
         users.setNickname(userBO.getUsername());
@@ -49,4 +63,5 @@ public class UsersServiceImpl implements IUsersService {
 
         return users;
     }
+
 }

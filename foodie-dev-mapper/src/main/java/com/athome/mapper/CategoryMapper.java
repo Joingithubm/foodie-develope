@@ -2,7 +2,10 @@ package com.athome.mapper;
 
 
 import com.athome.entity.Category;
+import com.athome.vo.CategoryVO;
 import tk.mybatis.mapper.common.Mapper;
+
+import java.util.List;
 
 /**
  * <p>
@@ -14,4 +17,10 @@ import tk.mybatis.mapper.common.Mapper;
  */
 public interface CategoryMapper extends Mapper<Category> {
 
+    /**
+     * 获取二级三级分类
+     * @param levelId
+     * @return
+     */
+    List<CategoryVO> getSubCatList(Integer levelId);
 }

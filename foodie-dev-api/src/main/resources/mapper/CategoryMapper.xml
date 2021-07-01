@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.athome.dev.mapper.CategoryMapper">
+<mapper namespace="com.athome.mapper.CategoryMapper">
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.athome.entity.Category">
@@ -14,9 +14,41 @@
         <result column="bg_color" property="bgColor" />
     </resultMap>
 
+    <!-- 通用查询映射结果 -->
+    <resultMap id="TwoLevelCat" type="com.athome.vo.CategoryVO">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="type" property="type" />
+        <result column="father_id" property="fatherId" />
+        
+        <collection property="subCatList" ofType="com.athome.vo.SubCategoryVO">
+            <id column="subId" property="subId" />
+            <result column="subName" property="subName" />
+            <result column="subType" property="subType" />
+            <result column="subFatherId" property="subFatherId" />
+        </collection>
+    </resultMap>
+
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         id, name, type, father_id, logo, slogan, cat_image, bg_color
     </sql>
+    
+    
+    <select id="getSubCatList" parameterType="java.lang.Integer" resultMap="TwoLevelCat">
+        select
+            f.id,
+            f.name,
+            f.type,
+            f.father_id,
+            c.id as subId,
+            c.name as subName,
+            c.type as subType,
+            c.father_id as subFatherId
+        from category f
+                 LEFT JOIN category c on f.id = c.father_id
+        where f.father_id = #{levelId}
+
+    </select>
 
 </mapper>
