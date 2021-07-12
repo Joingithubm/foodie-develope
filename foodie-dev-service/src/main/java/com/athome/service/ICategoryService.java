@@ -3,6 +3,7 @@ package com.athome.service;
 
 import com.athome.entity.Category;
 import com.athome.vo.CategoryVO;
+import com.athome.vo.NewItemsVO;
 
 import java.util.List;
 
@@ -28,5 +29,12 @@ public interface ICategoryService {
      * @return
      */
      List<CategoryVO> queryTwoLevelCat(Integer levelId);
+
+    /**
+     * 首页最新商品
+     * @param catId
+     * @return
+     */
+     List<NewItemsVO> queryIndexItems(Integer catId);
 
 }

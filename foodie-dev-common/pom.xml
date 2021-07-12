@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>foodie-common</artifactId>
+    <artifactId>foodie-dev-common</artifactId>
     <!--默认打包方式是jar包-->
     <packaging>jar</packaging>
 

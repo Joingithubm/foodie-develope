@@ -3,8 +3,10 @@ package com.athome.service.impl;
 
 import com.athome.entity.Category;
 import com.athome.mapper.CategoryMapper;
+import com.athome.mapper.ItemsMapper;
 import com.athome.service.ICategoryService;
 import com.athome.vo.CategoryVO;
+import com.athome.vo.NewItemsVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
@@ -25,6 +27,9 @@ public class CategoryServiceImpl  implements ICategoryService {
     @Autowired
     CategoryMapper categoryMapper;
 
+    @Autowired
+    ItemsMapper itemsMapper;
+
     @Override
     public List<Category> queryAllRootLevelCat() {
         Example example = new Example(Category.class);
@@ -36,6 +41,11 @@ public class CategoryServiceImpl  implements ICategoryService {
     public List<CategoryVO> queryTwoLevelCat(Integer levelId) {
 
         return categoryMapper.getSubCatList(levelId);
+    }
+
+    @Override
+    public List<NewItemsVO> queryIndexItems(Integer catId) {
+        return itemsMapper.findIndexItems(catId);
     }
 
 

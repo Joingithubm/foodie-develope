@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.athome.dev.mapper.ItemsMapper">
+<mapper namespace="com.athome.mapper.ItemsMapper">
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.athome.entity.Items">
@@ -15,13 +15,27 @@
         <result column="updated_time" property="updatedTime" />
     </resultMap>
 
+    <resultMap id="indexItems" type="com.athome.vo.NewItemsVO">
+        <result column="rootCatId" property="rootCatId"></result>
+        <result column="rootCatName" property="rootCatName"></result>
+        <result column="slogan" property="slogan"></result>
+        <result column="catImage" property="catImage"></result>
+        <result column="bgColor" property="bgColor"></result>
+
+        <collection property="simpleItemList" ofType="com.athome.vo.SimpleItemsVO">
+            <result column="itemId" property="itemId"/>
+            <result column="itemName" property="itemName"/>
+            <result column="itemUrl" property="itemUrl"/>
+        </collection>
+    </resultMap>
+
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         id, item_name, cat_id, root_cat_id, sell_counts, on_off_status, content, created_time, updated_time
     </sql>
 
 
-    <select id="getIndexItems" resultMap="" parameterType="java.lang.Integer">
+    <select id="findIndexItems" resultMap="indexItems" parameterType="java.lang.Integer">
         SELECT
             c.id AS rootCatId,
             c.NAME AS rootCatName,
@@ -44,5 +58,7 @@
             i.created_time DESC
             LIMIT 0,6
     </select>
+
+
 
 </mapper>

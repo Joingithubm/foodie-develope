@@ -1,4 +1,5 @@
 package com.athome.restful;
+import com.athome.restful.ResultCode;
 
 /**
  * @Description:

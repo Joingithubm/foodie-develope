@@ -8,13 +8,16 @@ import com.athome.restful.ResultCode;
 import com.athome.service.ICarouselService;
 import com.athome.service.ICategoryService;
 import com.athome.vo.CategoryVO;
+import com.athome.vo.NewItemsVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -57,6 +60,16 @@ public class IndexController {
             return CommonResult.error(ResultCode.SERVER_COMMON_ERROR);
         }
         List<CategoryVO> result = iCategoryService.queryTwoLevelCat(rootCatId);
+        return CommonResult.success(result);
+    }
+
+    @ApiOperation(value = "首页最新六个商品")
+    @RequestMapping("/sixNewItems/{rootCatId}")
+    public CommonResult sixNewItems(@PathVariable("rootCatId") Integer rootCatId){
+        if (rootCatId == null){
+            return CommonResult.error(ResultCode.SERVER_COMMON_ERROR);
+        }
+        List<NewItemsVO> result = iCategoryService.queryIndexItems(rootCatId);
         return CommonResult.success(result);
     }
 }

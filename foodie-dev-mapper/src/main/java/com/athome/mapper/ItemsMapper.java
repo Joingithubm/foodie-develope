@@ -2,7 +2,10 @@ package com.athome.mapper;
 
 
 import com.athome.entity.Items;
+import com.athome.vo.NewItemsVO;
 import tk.mybatis.mapper.common.Mapper;
+
+import java.util.List;
 
 /**
  * <p>
@@ -14,4 +17,5 @@ import tk.mybatis.mapper.common.Mapper;
  */
 public interface ItemsMapper extends Mapper<Items> {
 
+    List<NewItemsVO> findIndexItems(Integer catId);
 }
