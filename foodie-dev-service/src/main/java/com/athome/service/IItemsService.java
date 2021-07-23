@@ -5,6 +5,7 @@ import com.athome.entity.Items;
 import com.athome.entity.ItemsImg;
 import com.athome.entity.ItemsParam;
 import com.athome.entity.ItemsSpec;
+import com.athome.vo.CommentLevelCountsVo;
 
 import java.util.List;
 
@@ -45,4 +46,11 @@ public interface IItemsService {
      * @return
      */
      ItemsParam queryItemsParamById(String id);
+
+    /**
+     * 根据商品id ，查询商品评价等级
+     * @param itemId
+     * @return
+     */
+     CommentLevelCountsVo queryCommentCounts(String itemId);
 }

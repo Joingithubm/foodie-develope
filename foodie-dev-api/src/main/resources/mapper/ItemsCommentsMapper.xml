@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.athome.dev.mapper.ItemsCommentsMapper">
+<mapper namespace="com.athome.mapper.ItemsCommentsMapper">
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.athome.entity.ItemsComments">
         <id column="id" property="id" />
         <result column="user_id" property="userId" />
+        <result column="user_fake_nickname" property="userFakeNickname" />
+        <result column="user_face" property="userFace" />
         <result column="item_id" property="itemId" />
         <result column="item_name" property="itemName" />
         <result column="item_spec_id" property="itemSpecId" />
@@ -16,9 +18,33 @@
         <result column="updated_time" property="updatedTime" />
     </resultMap>
 
+    <resultMap id="Base_Comment_VO" type="com.athome.vo.ItemCommentVO">
+        <result column="commentLevel" property="commentLevel" />
+        <result column="content" property="content" />
+        <result column="createTime" property="createTime" />
+        <result column="specName" property="specName" />
+    </resultMap>
+
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, user_id, item_id, item_name, item_spec_id, sepc_name, comment_level, content, created_time, updated_time
+        id, user_id,user_fake_nickname, user_face,item_id, item_name, item_spec_id, sepc_name, comment_level, content, created_time, updated_time
     </sql>
+
+
+    <select id="findComment" resultMap="Base_Comment_VO" parameterType="map">
+        SELECT
+            c.comment_level commentLevel,
+            c.content content,
+            c.created_time createTime,
+            c.sepc_name specName
+        FROM
+            items_comments c
+                LEFT JOIN users u ON c.user_id = u.id
+        WHERE
+            c.item_id = #{itemId}
+          <if test="level != null and level != ''">
+          AND c.comment_level = #{level}
+          </if>
+    </select>
 
 </mapper>

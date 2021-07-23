@@ -29,6 +29,14 @@ public class ItemsComments implements Serializable {
      * 用户id 用户名须脱敏
      */
     private String userId;
+    /**
+     * 脱敏名称
+     */
+    private String userFakeNickname;
+    /**
+     * 用户图像
+     */
+    private String userFace;
 
     /**
      * 商品id

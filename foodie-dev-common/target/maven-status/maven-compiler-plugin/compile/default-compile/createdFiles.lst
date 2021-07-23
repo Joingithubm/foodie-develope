@@ -1,4 +1,6 @@
 com\athome\utils\JsonUtils.class
+com\athome\enums\CommentLevel.class
+com\athome\utils\PagedGridResult.class
 com\athome\enums\YesOrNo.class
 com\athome\utils\DateTool$DateRange.class
 com\athome\utils\DateTool.class

@@ -1,15 +1,11 @@
 package com.athome.service.impl;
 
 
-import com.athome.entity.Items;
-import com.athome.entity.ItemsImg;
-import com.athome.entity.ItemsParam;
-import com.athome.entity.ItemsSpec;
-import com.athome.mapper.ItemsImgMapper;
-import com.athome.mapper.ItemsMapper;
-import com.athome.mapper.ItemsParamMapper;
-import com.athome.mapper.ItemsSpecMapper;
+import com.athome.entity.*;
+import com.athome.enums.CommentLevel;
+import com.athome.mapper.*;
 import com.athome.service.IItemsService;
+import com.athome.vo.CommentLevelCountsVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -37,6 +33,8 @@ public class ItemsServiceImpl  implements IItemsService {
     ItemsImgMapper itemsImgMapper;
     @Autowired
     ItemsSpecMapper itemsSpecMapper;
+    @Autowired
+    ItemsCommentsMapper itemsCommentsMapper;
 
     @Transactional(propagation = Propagation.SUPPORTS)
     @Override
@@ -77,4 +75,36 @@ public class ItemsServiceImpl  implements IItemsService {
 
         return itemsParamMapper.selectOneByExample(example);
     }
+
+    @Transactional(propagation = Propagation.SUPPORTS)
+    @Override
+    public CommentLevelCountsVo queryCommentCounts(String itemId) {
+        Integer goodCount = getCommentCounts(itemId, CommentLevel.GOOD.type);
+        Integer normalCount = getCommentCounts(itemId, CommentLevel.NORMAL.type);
+        Integer badCount = getCommentCounts(itemId, CommentLevel.BAD.type);
+        Integer total = goodCount+normalCount+badCount;
+
+        CommentLevelCountsVo countsVo = new CommentLevelCountsVo();
+        countsVo.setGoodCounts(goodCount);
+        countsVo.setNormalCounts(normalCount);
+        countsVo.setBadCounts(badCount);
+        countsVo.setTotalCounts(total);
+        return countsVo;
+    }
+
+
+    private Integer getCommentCounts(String itemId, Integer type){
+
+        ItemsComments conditon = new ItemsComments();
+        conditon.setItemId(itemId);
+        if (type != null){
+            conditon.setCommentLevel(type);
+        }
+
+        return itemsCommentsMapper.selectCount(conditon);
+    }
+
+
+
+
 }

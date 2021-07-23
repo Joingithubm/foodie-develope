@@ -17,8 +17,8 @@ import java.util.List;
 @Data
 public class ItemInfoVO {
 
-    private Items items;
-    private List<ItemsImg> itemsImg;
-    private List<ItemsSpec> itemsSpec;
-    private ItemsParam itemsParam;
+    private Items item;
+    private List<ItemsImg> itemImgList;
+    private List<ItemsSpec> itemSpecList;
+    private ItemsParam itemParams;
 }
