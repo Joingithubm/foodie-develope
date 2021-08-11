@@ -5,7 +5,9 @@ import com.athome.entity.Items;
 import com.athome.entity.ItemsImg;
 import com.athome.entity.ItemsParam;
 import com.athome.entity.ItemsSpec;
+import com.athome.utils.PagedGridResult;
 import com.athome.vo.CommentLevelCountsVo;
+import com.athome.vo.ShopcartVO;
 
 import java.util.List;
 
@@ -53,4 +55,31 @@ public interface IItemsService {
      * @return
      */
      CommentLevelCountsVo queryCommentCounts(String itemId);
+
+    /**
+     * 分页查询搜索商品页
+     * @param keyword
+     * @param sort
+     * @param pageSize
+     * @param pageNum
+     * @return
+     */
+     PagedGridResult querySearchItems(String keyword, String sort, Integer pageSize, Integer pageNum);
+
+    /**
+     * 分页查询搜索商品页
+     * @param keyword
+     * @param sort
+     * @param pageSize
+     * @param pageNum
+     * @return
+     */
+    PagedGridResult querySearchItemsByCatId(String keyword, String sort, Integer pageSize, Integer pageNum);
+
+    /**
+     * 查询购物车规格
+     * @param specId
+     * @return
+     */
+    List<ShopcartVO> queryShopcartSpec(String specId);
 }

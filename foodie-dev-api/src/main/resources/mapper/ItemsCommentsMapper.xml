@@ -23,6 +23,8 @@
         <result column="content" property="content" />
         <result column="createTime" property="createTime" />
         <result column="specName" property="specName" />
+        <result column="userFace" property="userFace" />
+        <result column="nickname" property="nickname" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
@@ -36,7 +38,9 @@
             c.comment_level commentLevel,
             c.content content,
             c.created_time createTime,
-            c.sepc_name specName
+            c.sepc_name specName,
+            u.face userFace,
+            u.nickname nickname
         FROM
             items_comments c
                 LEFT JOIN users u ON c.user_id = u.id

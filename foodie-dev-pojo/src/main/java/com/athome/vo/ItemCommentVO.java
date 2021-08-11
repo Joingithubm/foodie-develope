@@ -16,4 +16,6 @@ public class ItemCommentVO {
     private String content;
     private Date createTime;
     private String specName;
+    private String userFace;
+    private String nickname;
 }

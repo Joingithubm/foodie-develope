@@ -2,6 +2,7 @@ package com.athome.mapper;
 
 
 import com.athome.entity.ItemsComments;
+import com.athome.vo.ItemCommentVO;
 import tk.mybatis.mapper.common.Mapper;
 
 import java.util.List;
@@ -17,5 +18,5 @@ import java.util.Map;
  */
 public interface ItemsCommentsMapper extends Mapper<ItemsComments> {
 
-    List<ItemsComments> findComment(Map<String,Object> map);
+    List<ItemCommentVO> findComment(Map<String,Object> map);
 }

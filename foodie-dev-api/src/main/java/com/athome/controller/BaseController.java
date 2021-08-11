@@ -14,4 +14,5 @@ public class BaseController {
 
     public final static Integer COMMENT_PAGE_NUM = 1;
     public final static Integer COMMENT_PAGE_SIZE = 10;
+    public final static Integer SEARCH_ITEMS_PAGE_SIZE = 20;
 }

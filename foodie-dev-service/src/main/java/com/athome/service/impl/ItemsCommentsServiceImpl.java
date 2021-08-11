@@ -4,6 +4,7 @@ package com.athome.service.impl;
 import com.athome.entity.ItemsComments;
 import com.athome.mapper.ItemsCommentsMapper;
 import com.athome.service.IItemsCommentsService;
+import com.athome.utils.DesensitizationUtil;
 import com.athome.utils.PagedGridResult;
 import com.athome.vo.ItemCommentVO;
 import com.github.pagehelper.PageHelper;
@@ -40,7 +41,10 @@ public class ItemsCommentsServiceImpl implements IItemsCommentsService {
         param.put("level",level);
 
         PageHelper.startPage(pageNum,pageSize);
-        List<ItemsComments> comment = itemsCommentsMapper.findComment(param);
+        List<ItemCommentVO> comment = itemsCommentsMapper.findComment(param);
+        for (ItemCommentVO itemsComments : comment) {
+            itemsComments.setNickname(DesensitizationUtil.commonDisplay(itemsComments.getNickname()));
+        }
 
         PagedGridResult grid = setPagedGridResult(comment, pageNum);
 

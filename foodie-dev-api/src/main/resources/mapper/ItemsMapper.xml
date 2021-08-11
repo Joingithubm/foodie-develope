@@ -29,6 +29,24 @@
         </collection>
     </resultMap>
 
+    <resultMap id="Search_Item" type="com.athome.vo.SearchItemsVO">
+        <result column="itemId" property="itemId" />
+        <result column="itemName" property="itemName" />
+        <result column="sellCounts" property="sellCounts" />
+        <result column="imgUrl" property="imgUrl" />
+        <result column="price" property="price" />
+    </resultMap>
+    
+    <resultMap id="Search_Item_Spec" type="com.athome.vo.ShopcartVO">
+        <result column="itemId" property="itemId"/>
+        <result column="itemImgUrl" property="itemImgUrl"/>
+        <result column="itemName" property="itemName"/>
+        <result column="specId" property="specId"/>
+        <result column="specName" property="specName"/>
+        <result column="priceDiscount" property="priceDiscount"/>
+        <result column="priceNormal" property="priceNormal"/>
+    </resultMap>
+
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         id, item_name, cat_id, root_cat_id, sell_counts, on_off_status, content, created_time, updated_time
@@ -60,5 +78,87 @@
     </select>
 
 
+    <select id="findItemBySearch" resultMap="Search_Item" parameterType="map">
+        SELECT
+            i.id itemId,
+            i.item_name itemName,
+            i.sell_counts sellCounts,
+            i.content,
+            img.url imgUrl,
+            t.price_discount price
+        FROM
+            items i
+                LEFT JOIN items_img img ON i.id = img.item_id
+                LEFT JOIN ( SELECT item_id, MIN( price_discount ) price_discount FROM items_spec GROUP BY item_id ) t ON i.id = t.item_id
+        WHERE
+            img.is_main =1
+            <if test="keyword != null and keyword != '' ">
+                AND i.item_name like '%${keyword}%'
+            </if>
+            order by
+            <choose>
+                <when test="sort == &quot;c&quot;">
+                    i.sell_counts desc
+                </when>
+                <when test="sort == &quot;p&quot;">
+                    t.price_discount asc
+                </when>
+                <otherwise>
+                    i.item_name asc
+                </otherwise>
+            </choose>
+    </select>
+
+    <select id="findItemByCatId" resultMap="Search_Item" parameterType="map">
+        SELECT
+        i.id itemId,
+        i.item_name itemName,
+        i.sell_counts sellCounts,
+        i.content,
+        img.url imgUrl,
+        t.price_discount price
+        FROM
+        items i
+        LEFT JOIN items_img img ON i.id = img.item_id
+        LEFT JOIN ( SELECT item_id, MIN( price_discount ) price_discount FROM items_spec GROUP BY item_id ) t ON i.id = t.item_id
+        WHERE
+        img.is_main =1
+
+            AND i.cat_id = #{catId}
+
+        order by
+        <choose>
+            <when test="sort == &quot;c&quot;">
+                i.sell_counts desc
+            </when>
+            <when test="sort == &quot;p&quot;">
+                t.price_discount asc
+            </when>
+            <otherwise>
+                i.item_name asc
+            </otherwise>
+        </choose>
+    </select>
+
+    <select id="findItemsSp" resultMap="Search_Item_Spec" parameterType="List">
+        SELECT
+            it.id itemId,
+            it.item_name itemName,
+            img.url itemImgUrl,
+            sp.id specId,
+            sp.`name` specName,
+            sp.price_normal priceNormal,
+            sp.price_discount priceDiscount
+        FROM
+            items it
+                LEFT JOIN items_spec sp ON it.id = sp.item_id
+                LEFT JOIN items_img img ON it.id = img.item_id
+        WHERE
+            img.is_main = 1
+          AND sp.id in
+        <foreach collection="specList" open="(" close=")" item="item" separator="," index="index">
+            #{item}
+        </foreach>
+    </select>
 
 </mapper>
