@@ -3,6 +3,7 @@ D:\SpringCloud\foodie-develope\foodie-dev-common\src\main\java\org\n3r\idworker\
 D:\SpringCloud\foodie-develope\foodie-dev-common\src\main\java\com\athome\enums\CommentLevel.java
 D:\SpringCloud\foodie-develope\foodie-dev-common\src\main\java\com\athome\utils\PagedGridResult.java
 D:\SpringCloud\foodie-develope\foodie-dev-common\src\main\java\com\athome\utils\DesensitizationUtil.java
+D:\SpringCloud\foodie-develope\foodie-dev-common\src\main\java\com\athome\enums\PayMethod.java
 D:\SpringCloud\foodie-develope\foodie-dev-common\src\main\java\com\athome\restful\CommonResult.java
 D:\SpringCloud\foodie-develope\foodie-dev-common\src\main\java\org\n3r\idworker\Test.java
 D:\SpringCloud\foodie-develope\foodie-dev-common\src\main\java\org\n3r\idworker\DayCode.java
@@ -25,5 +26,6 @@ D:\SpringCloud\foodie-develope\foodie-dev-common\src\main\java\org\n3r\idworker\
 D:\SpringCloud\foodie-develope\foodie-dev-common\src\main\java\com\athome\utils\CookieUtils.java
 D:\SpringCloud\foodie-develope\foodie-dev-common\src\main\java\com\athome\restful\ResultCode.java
 D:\SpringCloud\foodie-develope\foodie-dev-common\src\main\java\org\n3r\idworker\utils\IPv4Utils.java
+D:\SpringCloud\foodie-develope\foodie-dev-common\src\main\java\com\athome\enums\OrderStatusEnum.java
 D:\SpringCloud\foodie-develope\foodie-dev-common\src\main\java\com\athome\enums\YesOrNo.java
 D:\SpringCloud\foodie-develope\foodie-dev-common\src\main\java\org\n3r\idworker\utils\Props.java

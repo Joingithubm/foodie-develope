@@ -11,4 +11,10 @@ package com.athome.service;
  */
 public interface IItemsImgService {
 
+    /**
+     * 根据商品id 查询商品主图
+     * @param itemId
+     * @return
+     */
+    String queryItemMainByItemId(String itemId);
 }

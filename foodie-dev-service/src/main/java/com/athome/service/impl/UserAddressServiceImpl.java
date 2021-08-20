@@ -121,6 +121,16 @@ public class UserAddressServiceImpl  implements IUserAddressService {
         log.info("设置默认：{}",i);
     }
 
+    @Transactional(propagation = Propagation.SUPPORTS)
+    @Override
+    public UserAddress queryAddressByUserIdAndId(String userId, String addressId) {
+
+        UserAddress userAddress = new UserAddress();
+        userAddress.setUserId(userId);
+        userAddress.setId(addressId);
+
+        return userAddressMapper.selectOne(userAddress);
+    }
 
 
 }

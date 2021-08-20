@@ -13,6 +13,7 @@ org\n3r\idworker\Sid$1.class
 org\n3r\idworker\utils\Props.class
 org\n3r\idworker\strategy\DefaultRandomCodeStrategy$1.class
 org\n3r\idworker\Sid.class
+com\athome\enums\OrderStatusEnum.class
 org\n3r\idworker\RandomCodeStrategy.class
 org\n3r\idworker\utils\IPv4Utils.class
 com\athome\utils\DesensitizationUtil.class
@@ -21,6 +22,7 @@ com\athome\utils\JsonUtils.class
 com\athome\utils\DateTool$DateRange.class
 org\n3r\idworker\WorkerIdStrategy.class
 org\n3r\idworker\utils\Utils.class
+com\athome\enums\PayMethod.class
 org\n3r\idworker\DayCode.class
 org\n3r\idworker\strategy\DayPrefixRandomCodeStrategy.class
 org\n3r\idworker\IdWorker.class

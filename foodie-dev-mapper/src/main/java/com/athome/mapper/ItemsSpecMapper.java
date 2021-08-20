@@ -2,6 +2,7 @@ package com.athome.mapper;
 
 
 import com.athome.entity.ItemsSpec;
+import org.apache.ibatis.annotations.Param;
 import tk.mybatis.mapper.common.Mapper;
 
 /**
@@ -14,4 +15,5 @@ import tk.mybatis.mapper.common.Mapper;
  */
 public interface ItemsSpecMapper extends Mapper<ItemsSpec> {
 
+    void decreaseItemSpecStock(@Param("itemSpecId") String itemSpecId, @Param("buyCounts") Integer buyCounts);
 }

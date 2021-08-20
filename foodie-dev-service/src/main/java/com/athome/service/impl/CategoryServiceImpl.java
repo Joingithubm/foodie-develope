@@ -39,7 +39,6 @@ public class CategoryServiceImpl  implements ICategoryService {
 
     @Override
     public List<CategoryVO> queryTwoLevelCat(Integer levelId) {
-
         return categoryMapper.getSubCatList(levelId);
     }
 
