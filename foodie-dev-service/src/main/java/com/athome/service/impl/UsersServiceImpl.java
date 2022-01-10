@@ -6,11 +6,17 @@ import com.athome.entity.Users;
 import com.athome.mapper.UsersMapper;
 import com.athome.service.IUsersService;
 import com.athome.utils.MD5Util;
+import io.swagger.models.auth.In;
+import org.apache.catalina.User;
+import org.apache.ibatis.javassist.bytecode.SignatureAttribute;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 import tk.mybatis.mapper.entity.Example;
 
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -62,6 +68,17 @@ public class UsersServiceImpl implements IUsersService {
         usersMapper.insert(users);
 
         return users;
+    }
+
+
+    @Override
+    public List<Users> getUsersByIds(List<Integer> ids){
+
+        if (CollectionUtils.isEmpty(ids)){
+            throw  new RuntimeException("参数不能为空");
+        }
+
+        return usersMapper.selectByIds(ids);
     }
 
 }

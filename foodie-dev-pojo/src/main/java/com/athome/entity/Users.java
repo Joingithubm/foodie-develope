@@ -3,6 +3,7 @@ package com.athome.entity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -16,6 +17,7 @@ import java.util.Date;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
+@Table(name = "users")
 public class Users implements Serializable {
 
     private static final long serialVersionUID = 1L;

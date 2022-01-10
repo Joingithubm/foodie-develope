@@ -2,7 +2,11 @@ package com.athome.mapper;
 
 
 import com.athome.entity.Users;
+import io.swagger.models.auth.In;
+import org.apache.catalina.User;
 import tk.mybatis.mapper.common.Mapper;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,5 +17,7 @@ import tk.mybatis.mapper.common.Mapper;
  * @since 2021-06-28
  */
 public interface UsersMapper extends Mapper<Users> {
+
+    List<Users> selectByIds(List<Integer> ids);
 
 }

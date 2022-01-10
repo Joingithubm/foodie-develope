@@ -23,7 +23,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 public class Swagger2Config {
 
     //原路径 htpp://localhost:8088/swagger-ui.html
-    //bootstrap  htpp://localhost:8088/doc.html
+    //bootstrap  http://localhost:8088/doc.html
 
     @Bean
     public Docket createDocket(){

@@ -4,6 +4,8 @@ package com.athome.service;
 import com.athome.bo.UserBO;
 import com.athome.entity.Users;
 
+import java.util.List;
+
 /**
  * <p>
  * 用户表 服务类
@@ -35,4 +37,11 @@ public interface IUsersService {
      * @return
      */
     Users createUser(UserBO userBO);
+
+    /**
+     *  根据 ID 查询用户
+     * @param ids
+     * @return
+     */
+    List<Users> getUsersByIds(List<Integer> ids);
 }
